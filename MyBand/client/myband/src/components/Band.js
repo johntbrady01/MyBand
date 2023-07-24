@@ -11,7 +11,7 @@ export const Band = ({ band }) => {
     return (
         <Card
             style={{
-                width: '12rem',
+                width: '18rem',
                 color: "success",
                 margin: '2rem'
 
@@ -21,13 +21,18 @@ export const Band = ({ band }) => {
                 alt="Sample"
                 src={band.profilePic}
                 style={{
-                    width: '12rem',
+                    width: '18rem',
                     height: '12rem',
                     objectFit: 'cover'
                 }}
             />
             <CardBody>
-                <CardTitle tag="h5">
+                <CardTitle tag="h5"
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}
+                >
                     {band.name}
                 </CardTitle>
             </CardBody>
