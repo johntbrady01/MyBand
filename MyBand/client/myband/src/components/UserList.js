@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { User } from "./User";
-import { Row } from "reactstrap";
-import { Col } from "reactstrap";
 
 
 export const UserList = () => {
@@ -16,7 +14,7 @@ export const UserList = () => {
     )
 
     return (
-        <div class="userPhotoContainer">
+        <div class="PhotoContainer">
             {users.map((user) => (<User user={user} key={user.id} />))}
         </div>
 
