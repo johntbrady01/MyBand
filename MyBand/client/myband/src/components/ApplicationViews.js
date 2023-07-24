@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import UserList from "./UserList";
+import BandList from "./BandList";
 
 
 export default function ApplicationViews({ isLoggedIn, profile }) {
@@ -13,6 +14,7 @@ export default function ApplicationViews({ isLoggedIn, profile }) {
                         index
                         element={isLoggedIn ? <UserList /> : <Navigate to="/login" />}
                     />
+                    <Route path="bands" element={<BandList />} />
                     <Route path="login" element={<Login />} />
                     <Route path="*" element={<p>Whoops, nothing here...</p>} />
                 </Route>

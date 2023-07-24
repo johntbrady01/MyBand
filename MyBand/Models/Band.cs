@@ -1,22 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MyBand.Models
 {
-	public class User
+	public class Band
 	{
         public int id { get; set; }
-
-        [Required]
-        [MaxLength(225)]
-        public string username { get; set; }
-
-        [Required]
-        [MaxLength(225)]
-        public string email { get; set; }
-
-
-        public string firebaseId { get; set; }
 
         [Required]
         [MaxLength(225)]
@@ -36,8 +26,9 @@ namespace MyBand.Models
 
         [Required]
         [MaxLength(225)]
-        public string skills { get; set; }
+        public string searchingFor { get; set; }
 
+        public List<User> users { get; set; }
     }
 }
 

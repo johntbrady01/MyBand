@@ -4,14 +4,14 @@ import { CardBody } from "reactstrap";
 import { CardTitle } from "reactstrap";
 import { Card } from "reactstrap";
 
-export const User = ({ user }) => {
+export const Band = ({ band }) => {
 
     const navigate = useNavigate()
 
     return (
         <Card
             style={{
-                width: '12rem',
+                width: '18rem',
                 color: "success",
                 margin: '2rem'
 
@@ -19,16 +19,21 @@ export const User = ({ user }) => {
         >
             <img
                 alt="Sample"
-                src={user.profilePic}
+                src={band.profilePic}
                 style={{
-                    width: '12rem',
+                    width: '18rem',
                     height: '12rem',
                     objectFit: 'cover'
                 }}
             />
             <CardBody>
-                <CardTitle tag="h5">
-                    {user.name}
+                <CardTitle tag="h5"
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}
+                >
+                    {band.name}
                 </CardTitle>
             </CardBody>
         </Card>
