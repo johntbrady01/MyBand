@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using MyBand.Models;
 using MyBand.Repositories;
+using Azure;
 
 namespace MyBand.Controllers
 {
@@ -33,6 +34,13 @@ namespace MyBand.Controllers
                 return NotFound();
             }
             return Ok(band);
+        }
+
+        [HttpPost]
+        public IActionResult AddBand(Band band)
+        {
+            _bandRepository.Add(band);
+            return Ok(_bandRepository.GetAllBands());
         }
     }
 }

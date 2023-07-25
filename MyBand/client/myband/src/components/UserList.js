@@ -14,9 +14,12 @@ export const UserList = ({ userProfile }) => {
     )
 
     return (
-        <div class="PhotoContainer">
-            {users.map((user) => (<User user={user} key={user.id} />))}
-        </div>
+        <>
+            <div>{userProfile?.name}</div>
+            <div className="PhotoContainer">
+                {users.map((user) => (<User user={user} key={user.id} />))}
+            </div>
+        </>
 
     )
 }
