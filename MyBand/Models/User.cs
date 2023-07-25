@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MyBand.Models
@@ -37,6 +38,8 @@ namespace MyBand.Models
         [Required]
         [MaxLength(225)]
         public string skills { get; set; }
+
+        public List<Band> bands { get; set; }
 
     }
 }

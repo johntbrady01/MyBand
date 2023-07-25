@@ -17,3 +17,12 @@ code {
   justify-content: space-around;
   flex-wrap: wrap;
 }
+
+.profilePage {
+  width: 75%;
+}
+
+.profilePageContainer {
+  display: flex;
+  justify-content: center;
+}

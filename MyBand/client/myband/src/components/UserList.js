@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { User } from "./User";
 
 
-export const UserList = () => {
+export const UserList = ({ userProfile }) => {
     const baseUrl = '/api/User/'
     const [users, setUsers] = useState([])
 
