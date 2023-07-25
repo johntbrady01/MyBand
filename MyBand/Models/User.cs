@@ -41,6 +41,8 @@ namespace MyBand.Models
 
         public List<Band> bands { get; set; }
 
+        public string role { get; set; }
+
     }
 }
 

@@ -4,6 +4,7 @@ import Login from "./Login";
 import UserList from "./UserList";
 import BandList from "./BandList";
 import { UserDetails } from "./UserDetails";
+import { BandDetails } from "./BandDetails";
 
 
 export default function ApplicationViews({ isLoggedIn, userProfile }) {
@@ -18,6 +19,7 @@ export default function ApplicationViews({ isLoggedIn, userProfile }) {
                     <Route path="bands" element={<BandList />} />
                     <Route path="login" element={<Login />} />
                     <Route path="User/:userId" element={<UserDetails />} />
+                    <Route path="Band/:bandId" element={<BandDetails />} />
                     <Route path="*" element={<p>Whoops, nothing here...</p>} />
                 </Route>
             </Routes>

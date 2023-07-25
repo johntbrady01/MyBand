@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { CardBody } from "reactstrap";
 import { CardTitle } from "reactstrap";
 import { Card } from "reactstrap";
+import { Link } from "react-router-dom"
 
 export const Band = ({ band }) => {
 
@@ -33,7 +34,7 @@ export const Band = ({ band }) => {
                         justifyContent: 'center'
                     }}
                 >
-                    {band.name}
+                    <Link to={`/Band/${band.id}`}>{band.name}</Link>
                 </CardTitle>
             </CardBody>
         </Card>

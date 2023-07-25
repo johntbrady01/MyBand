@@ -7,6 +7,7 @@ namespace MyBand.Repositories
 	public interface IBandRepository
 	{
         public List<Band> GetAllBands();
+        public Band GetByIdWithUsers(int id);
 
     }
 }
