@@ -58,6 +58,17 @@ namespace MyBand.Controllers
         {
             return Ok(_userRepository.GetAllUsers());
         }
+
+        [HttpGet("GetByIdWithBands")]
+        public IActionResult GetByIdWithComments(int id)
+        {
+            var user = _userRepository.GetByIdWithBands(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
     }
 }
 

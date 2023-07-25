@@ -30,8 +30,8 @@ function App() {
 
   return (
     <Router>
-      <Header isLoggedIn={isLoggedIn} profile={userProfile} />
-      <ApplicationViews isLoggedIn={isLoggedIn} profile={userProfile} />
+      <Header isLoggedIn={isLoggedIn} userProfile={userProfile} />
+      <ApplicationViews isLoggedIn={isLoggedIn} userProfile={userProfile} />
     </Router>
   );
 }
