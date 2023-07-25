@@ -8,6 +8,7 @@ namespace MyBand.Repositories
 	{
         public List<Band> GetAllBands();
         public Band GetByIdWithUsers(int id);
+        public void Add(Band band);
 
     }
 }

@@ -107,6 +107,29 @@ namespace MyBand.Repositories
             }
 
         }
+
+        public void Add(Band band)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Band (name, bio, profilePic, genres, searchingFor)
+                        OUTPUT INSERTED.ID
+                        VALUES (@name, @bio, @profilePic, @genres, @searchingFor)";
+
+                    DbUtils.AddParameter(cmd, "@name", band.name);
+                    DbUtils.AddParameter(cmd, "@bio", band.name);
+                    DbUtils.AddParameter(cmd, "@profilePic", band.name);
+                    DbUtils.AddParameter(cmd, "@genres", band.name);
+                    DbUtils.AddParameter(cmd, "@searchingFor", band.name);
+
+                    band.id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
     }
 }
 

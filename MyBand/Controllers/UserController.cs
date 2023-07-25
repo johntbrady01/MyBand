@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using MyBand.Models;
 using MyBand.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyBand.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   
+ 
 
     public class UserController : ControllerBase
     {
@@ -36,6 +39,7 @@ namespace MyBand.Controllers
         }
 
         [HttpGet("Me")]
+        [Authorize]
         public IActionResult Me()
         {
             var user = GetCurrentUser();
@@ -47,6 +51,7 @@ namespace MyBand.Controllers
             return Ok(user);
         }
 
+        
         private User GetCurrentUser()
         {
             var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;

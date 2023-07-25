@@ -15,13 +15,13 @@ function App() {
   }, []);
 
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     me().then(setUserProfile);
-  //   } else {
-  //     setUserProfile(null);
-  //   }
-  // }, [isLoggedIn]);
+  useEffect(() => {
+    if (isLoggedIn) {
+      me().then(setUserProfile);
+    } else {
+      setUserProfile(null);
+    }
+  }, [isLoggedIn]);
 
 
   if (isLoggedIn === null) {
