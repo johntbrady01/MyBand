@@ -61,7 +61,7 @@ export const UserDetails = () => {
                                         justifyContent: "space-between"
                                     }}
                                 >
-                                    {band.name}
+                                    <Link to={`/Band/${band.id}`}>{band.name}</Link>
                                 </CardTitle>
                             </CardBody>
                         </Card>

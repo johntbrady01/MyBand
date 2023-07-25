@@ -60,7 +60,7 @@ namespace MyBand.Controllers
         }
 
         [HttpGet("GetByIdWithBands")]
-        public IActionResult GetByIdWithComments(int id)
+        public IActionResult GetByIdWithBands(int id)
         {
             var user = _userRepository.GetByIdWithBands(id);
             if (user == null)

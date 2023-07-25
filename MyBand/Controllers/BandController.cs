@@ -23,6 +23,17 @@ namespace MyBand.Controllers
         {
             return Ok(_bandRepository.GetAllBands());
         }
+
+        [HttpGet("GetByIdWithUsers")]
+        public IActionResult GetByIdWithUsers(int id)
+        {
+            var band = _bandRepository.GetByIdWithUsers(id);
+            if (band == null)
+            {
+                return NotFound();
+            }
+            return Ok(band);
+        }
     }
 }
 
