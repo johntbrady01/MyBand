@@ -40,7 +40,7 @@ namespace MyBand.Controllers
         public IActionResult AddBand(Band band)
         {
             _bandRepository.Add(band);
-            return Ok(_bandRepository.GetAllBands());
+            return Ok(band.id);
         }
     }
 }

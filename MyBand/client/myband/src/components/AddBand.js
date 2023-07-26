@@ -69,7 +69,7 @@ export const AddBand = ({ userProfile }) => {
 
         })
             .then(response => response.json())
-            .then((band) => { bandUserRequestToSendToApi.bandId = band.id })
+            .then((band) => { bandUserRequestToSendToApi.bandId = band })
             .then(() => {
                 return fetch(`/api/BandUserRequest`, {
                     method: "POST",
