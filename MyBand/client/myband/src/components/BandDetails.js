@@ -34,7 +34,7 @@ export const BandDetails = () => {
                     <p>Genres: {band.genres}</p>
                 </div>
                 <h2>Members:</h2>
-                <div class="PhotoContainer">
+                <div className="PhotoContainer">
                     {band?.users?.map((user) => (
                         <>
                             <div>

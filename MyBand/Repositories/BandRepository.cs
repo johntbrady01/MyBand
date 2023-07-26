@@ -121,10 +121,10 @@ namespace MyBand.Repositories
                         VALUES (@name, @bio, @profilePic, @genres, @searchingFor)";
 
                     DbUtils.AddParameter(cmd, "@name", band.name);
-                    DbUtils.AddParameter(cmd, "@bio", band.name);
-                    DbUtils.AddParameter(cmd, "@profilePic", band.name);
-                    DbUtils.AddParameter(cmd, "@genres", band.name);
-                    DbUtils.AddParameter(cmd, "@searchingFor", band.name);
+                    DbUtils.AddParameter(cmd, "@bio", band.bio);
+                    DbUtils.AddParameter(cmd, "@profilePic", band.profilePic);
+                    DbUtils.AddParameter(cmd, "@genres", band.genres);
+                    DbUtils.AddParameter(cmd, "@searchingFor", band.searchingFor);
 
                     band.id = (int)cmd.ExecuteScalar();
                 }
