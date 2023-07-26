@@ -72,6 +72,7 @@ export const BandDetails = () => {
                     ))}
                 </div>
                 <p>Searching For: {band.searchingFor}</p>
+                <Link to={`/bandrequest/${band.id}`}>Request to join band</Link>
             </div>
         </div>
     </>
