@@ -186,7 +186,7 @@ export const AddBand = ({ userProfile }) => {
                             (evt) => {
                                 const copy = { ...bandUserRequest }
                                 copy.roleId = parseInt(evt.target.value)
-                                update(copy)
+                                updateBandUserRequest(copy)
                             }}>
                         {roles.map((role) => {
                             return <option
