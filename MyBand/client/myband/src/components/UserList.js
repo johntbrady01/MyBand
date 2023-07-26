@@ -15,7 +15,7 @@ export const UserList = ({ userProfile }) => {
 
     return (
         <>
-            <div>{userProfile?.name}</div>
+
             <div className="PhotoContainer">
                 {users.map((user) => (<User user={user} key={user.id} />))}
             </div>
