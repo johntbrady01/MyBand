@@ -5,17 +5,47 @@ import { CardTitle } from "reactstrap";
 import { Card } from "reactstrap";
 
 
-export const BandDetails = () => {
+export const BandDetails = ({ userProfile }) => {
     const { bandId } = useParams()
     const baseUrl = `/api/Band/GetByIdWithUsers?id=${bandId}`
     const [band, setBand] = useState([])
+    const [bandWithLeaders, setBandWithLeaders] = useState([])
+    const leaderUrl = `/api/Band/GetByIdWithLeaders?id=${bandId}`
+    const [isLeader, setIsLeader] = useState(false)
+    const [inBand, setInBand] = useState(false)
 
     useEffect(() => {
-        fetch(baseUrl).then(res => (res.json())).then(band => setBand(band))
+        fetch(baseUrl).then(res => (res.json())).then(band => {
+            setBand(band)
+            for (const user of band.users) {
+                if (userProfile?.id === user?.id) {
+                    setInBand(true)
+                    break;
+                }
+            }
+        })
 
     }
         , [bandId]
     )
+
+    useEffect(() => {
+        fetch(leaderUrl).then(res => (res.json()))
+            .then(bandWithLeader => {
+                setBandWithLeaders(bandWithLeader)
+                for (const user of bandWithLeader.users) {
+                    if (userProfile?.id === user?.id) {
+                        setIsLeader(true)
+                        break;
+                    }
+                }
+
+            })
+
+    }
+        , [bandId]
+    )
+
 
 
     return <>
@@ -72,8 +102,24 @@ export const BandDetails = () => {
                     ))}
                 </div>
                 <p>Searching For: {band.searchingFor}</p>
-                <Link to={`/bandrequest/${band.id}`}>Request to join band</Link>
+                {
+                    (inBand)
+                        ? <>
+
+                        </>
+                        : <Link to={`/bandrequest/${band.id}`}>Request to join band</Link>
+
+                }
+
             </div>
+            {
+                (isLeader)
+                    ? <>
+                        <Link>See Requests to join band</Link>
+                    </>
+                    : <>
+                    </>
+            }
         </div>
     </>
 }
