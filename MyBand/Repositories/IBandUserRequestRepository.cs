@@ -8,6 +8,7 @@ namespace MyBand.Repositories
 	{
         public void Add(BandUserRequest bandUserRequest);
         public List<BandUserRequest> GetAllBandUserRequests();
+        public void Update(BandUserRequest bandUserRequest);
 
     }
 }

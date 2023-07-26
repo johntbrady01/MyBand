@@ -72,6 +72,37 @@ namespace MyBand.Repositories
                 }
             }
         }
+
+        public void Update(BandUserRequest bandUserRequest)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE BandUserRequest " +
+                                      "SET [userId] = @userId, " +
+                                      "[bandId] = @bandId, " +
+                                      "[roleId] = @roleId, " +
+                                      "[isLeader] = @isLeader, " +
+                                      "[isAccepted] = @isAccepted, " +
+                                      "[note] = @note, " +
+                                      "[sentByBand] = @sentByBand " +
+                                      "WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", bandUserRequest.id);
+                    cmd.Parameters.AddWithValue("@userId", bandUserRequest.userId);
+                    cmd.Parameters.AddWithValue("@bandId", bandUserRequest.bandId);
+                    cmd.Parameters.AddWithValue("@roleId", bandUserRequest.roleId);
+                    cmd.Parameters.AddWithValue("@isLeader", bandUserRequest.isLeader);
+                    cmd.Parameters.AddWithValue("@isAccepted", bandUserRequest.isAccepted);
+                    cmd.Parameters.AddWithValue("@note", bandUserRequest.note);
+                    cmd.Parameters.AddWithValue("@sentByBand", bandUserRequest.sentByBand);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
     }
 }
 

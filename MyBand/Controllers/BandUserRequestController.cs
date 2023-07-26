@@ -25,6 +25,13 @@ namespace MyBand.Controllers
             _bandUserRequestRepository.Add(bandUserRequest);
             return Ok(_bandUserRequestRepository.GetAllBandUserRequests());
         }
+
+        [HttpPut]
+        public IActionResult Edit(BandUserRequest bandUserRequest)
+        {
+            _bandUserRequestRepository.Update(bandUserRequest);
+            return Ok(bandUserRequest);
+        }
     }
 }
 
