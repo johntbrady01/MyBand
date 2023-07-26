@@ -42,6 +42,17 @@ namespace MyBand.Controllers
             _bandRepository.Add(band);
             return Ok(band.id);
         }
+
+        [HttpGet("GetByIdWithLeaders")]
+        public IActionResult GetByIdWithLeaders(int id)
+        {
+            var band = _bandRepository.GetByIdWithLeaders(id);
+            if (band == null)
+            {
+                return NotFound();
+            }
+            return Ok(band);
+        }
     }
 }
 

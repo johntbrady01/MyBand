@@ -23,7 +23,7 @@ export default function ApplicationViews({ isLoggedIn, userProfile }) {
                     <Route path="User/:userId" element={<UserDetails />} />
                     <Route path="/bands/create" element={<AddBand userProfile={userProfile} />} />
                     <Route path="/bandrequest/:bandId" element={<BandUserRequest userProfile={userProfile} />} />
-                    <Route path="Band/:bandId" element={<BandDetails />} />
+                    <Route path="Band/:bandId" element={<BandDetails userProfile={userProfile} />} />
                     <Route path="*" element={<p>Whoops, nothing here...</p>} />
                 </Route>
             </Routes>
