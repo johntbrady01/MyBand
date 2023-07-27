@@ -74,6 +74,13 @@ namespace MyBand.Controllers
             }
             return Ok(user);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Edit(User user)
+        {
+            _userRepository.Update(user);
+            return Ok(user);
+        }
     }
 }
 

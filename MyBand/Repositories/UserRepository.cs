@@ -95,12 +95,13 @@ namespace MyBand.Repositories
                 {
                     cmd.CommandText = @"
                        SELECT u.Id AS UserId, u.userName, u.email, u.firebaseId, u.name, 
-                        u.bio AS UserBio, u.profilePic AS UserProfilePic, u.genres, u.skills,
-                        b.profilePic AS BandProfilePic, b.name AS BandName, b.Id AS BandId,
-                        BandUserRequest.isAccepted
+                        u.bio AS UserBio, u.profilePic AS UserProfilePic, u.genres AS userGenres, u.skills,
+                        b.profilePic AS BandProfilePic, b.name AS BandName, b.Id AS BandId, b.bio AS bandBio, b.genres AS bandGenres, b.searchingFor,
+                        BandUserRequest.isAccepted, r.id, r.name AS RoleName
                         FROM [User] u
                         LEFT JOIN [BandUserRequest] ON BandUserRequest.userId = u.id AND BandUserRequest.isAccepted = 1
                         LEFT JOIN Band b ON b.id = BandUserRequest.bandId
+                        JOIN Role r on BandUserRequest.roleId=r.id
                         WHERE u.id =@Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
@@ -125,9 +126,10 @@ namespace MyBand.Repositories
                                     name = DbUtils.GetString(reader, "name"),
                                     bio = DbUtils.GetString(reader, "UserBio"),
                                     profilePic = DbUtils.GetString(reader, "UserProfilePic"),
-                                    genres = DbUtils.GetString(reader, "genres"),
+                                    genres = DbUtils.GetString(reader, "userGenres"),
                                     skills = DbUtils.GetString(reader, "skills"),
-                                    bands = new List<Band>()
+                                    bands = new List<Band>(),
+                                    role = DbUtils.GetString(reader, "RoleName"),
                                 };
                             }
 
@@ -137,7 +139,10 @@ namespace MyBand.Repositories
                                 {
                                     id = DbUtils.GetInt(reader, "BandId"),
                                     name = DbUtils.GetString(reader, "BandName"),
+                                    bio = DbUtils.GetString(reader, "bandBio"),
                                     profilePic = DbUtils.GetString(reader, "BandProfilePic"),
+                                    genres = DbUtils.GetString(reader, "bandGenres"),
+                                    searchingFor = DbUtils.GetString(reader, "searchingFor"),
                                 });
                             }
                         }
@@ -146,9 +151,42 @@ namespace MyBand.Repositories
 
 
                     }
+
+
                 }
             }
 
+        }
+
+        public void Update(User user)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE [User] " +
+                                      "SET [username] = @username, " +
+                                      "[email] = @email, " +
+                                      "[firebaseId] = @firebaseId, " +
+                                      "[name] = @name, " +
+                                      "[bio] = @bio, " +
+                                      "[profilePic] = @profilePic, " +
+                                      "[genres] = @genres, " +
+                                      "[skills] = @skills " +
+                                      "WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", user.id);
+                    cmd.Parameters.AddWithValue("@username", user.username);
+                    cmd.Parameters.AddWithValue("@email", user.email);
+                    cmd.Parameters.AddWithValue("@firebaseId", user.firebaseId);
+                    cmd.Parameters.AddWithValue("@name", user.name);
+                    cmd.Parameters.AddWithValue("@bio", user.bio);
+                    cmd.Parameters.AddWithValue("@profilePic", user.profilePic);
+                    cmd.Parameters.AddWithValue("@genres", user.genres);
+                    cmd.Parameters.AddWithValue("@skills", user.skills);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

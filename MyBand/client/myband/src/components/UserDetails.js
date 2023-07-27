@@ -6,13 +6,21 @@ import { CardTitle } from "reactstrap";
 import { Card } from "reactstrap";
 
 
-export const UserDetails = () => {
+export const UserDetails = ({ userProfile }) => {
     const { userId } = useParams()
     const baseUrl = `/api/User/GetByIdWithBands?id=${userId}`
     const [user, setUser] = useState([])
+    const [isMe, setIsMe] = useState(false)
 
     useEffect(() => {
-        fetch(baseUrl).then(res => (res.json())).then(user => setUser(user))
+        fetch(baseUrl).then(res => (res.json())).then(user => {
+            setUser(user)
+            if (userProfile?.id === user.id) {
+                setIsMe(true)
+
+            }
+
+        })
 
     }
         , [userId]
@@ -20,6 +28,16 @@ export const UserDetails = () => {
 
 
     return <>
+        <div>
+            {
+                (isMe)
+                    ? <>
+                        <Link to={`/updateprofile/${user.id}`}>Edit Profile</Link>
+                    </>
+                    : <>
+                    </>
+            }
+        </div>
         <div className="profilePageContainer">
             <div className="profilePage">
                 <div>
