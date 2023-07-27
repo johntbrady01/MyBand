@@ -11,6 +11,7 @@ namespace MyBand.Repositories
         public void Update(BandUserRequest bandUserRequest);
         public List<BandUserRequest> GetByBandId(int id);
         public BandUserRequest GetByIdWithEverything(int id);
+        public void Delete(int id);
 
     }
 }

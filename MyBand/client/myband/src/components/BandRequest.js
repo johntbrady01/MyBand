@@ -34,6 +34,22 @@ export const BandRequest = ({ request }) => {
 
     }
 
+    const deleteButton = () => {
+        return <button onClick={() => {
+
+            fetch(`/api/BandUserRequest/${request.id}`, {
+                method: "DELETE"
+            })
+                .then(() => {
+                    navigate(`/Band/${request.bandId}`)
+                })
+
+        }} className="request__delete">Delete</button>
+    }
+
+
+
+
 
     return (
         <div className="requestDiv">
@@ -41,7 +57,7 @@ export const BandRequest = ({ request }) => {
             <p>{request?.role?.name}</p>
             <p>{request?.note}</p>
             <div className="button">{acceptButton()}</div>
-            <button>Deny</button>
+            <div className="button">{deleteButton()}</div>
         </div>
     )
 }

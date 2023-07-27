@@ -54,6 +54,13 @@ namespace MyBand.Controllers
             }
             return Ok(request);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _bandUserRequestRepository.Delete(id);
+            return Ok(_bandUserRequestRepository.GetAllBandUserRequests());
+        }
     }
 }
 
