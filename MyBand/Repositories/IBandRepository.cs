@@ -11,6 +11,7 @@ namespace MyBand.Repositories
         public void Add(Band band);
         public Band GetByIdWithLeaders(int id);
         public void Update(Band band);
+        public void Delete(int id);
 
     }
 }

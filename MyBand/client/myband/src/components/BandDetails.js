@@ -69,6 +69,16 @@ export const BandDetails = ({ userProfile }) => {
                     </>
             }
         </div>
+        <div>
+            {
+                (isLeader)
+                    ? <>
+                        <Link to={`/deleteband/${band.id}`}>Delete</Link>
+                    </>
+                    : <>
+                    </>
+            }
+        </div>
         <div className="profilePageContainer">
             <div className="profilePage">
                 <div>
