@@ -60,6 +60,13 @@ namespace MyBand.Controllers
             _bandRepository.Update(band);
             return Ok(band);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _bandRepository.Delete(id);
+            return Ok(_bandRepository.GetAllBands());
+        }
     }
 }
 
