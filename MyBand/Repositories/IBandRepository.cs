@@ -10,6 +10,7 @@ namespace MyBand.Repositories
         public Band GetByIdWithUsers(int id);
         public void Add(Band band);
         public Band GetByIdWithLeaders(int id);
+        public void Update(Band band);
 
     }
 }

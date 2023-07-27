@@ -53,7 +53,8 @@ namespace MyBand.Repositories
                 {
                     cmd.CommandText = @"
                      SELECT  b.profilePic AS BandProfilePic, b.name AS BandName, b.Id AS BandId,
-                        bUR.isAccepted, bUR.roleId, r.Name As RoleName, b.bio, b.genres, b.searchingFor, u.Id AS UserId, u.firebaseId, u.name AS UserName, u.profilePic AS UserProfilePic
+                        bUR.isAccepted, bUR.roleId, r.Name As RoleName, b.bio AS bandBio, b.genres AS bandGenres, b.searchingFor, u.Id AS UserId, u.username, u.email, u.firebaseId, u.name AS UserName, u.bio AS userBio, u.profilePic AS UserProfilePic,
+                        u.genres AS userGenres, u.skills
                         FROM Band b
                         JOIN BandUserRequest bUR ON b.id = bUR.bandId
                         JOIN [User] u ON bUR.userId=u.id
@@ -78,9 +79,9 @@ namespace MyBand.Repositories
                                 {
                                     id = DbUtils.GetInt(reader, "BandId"),
                                     name = DbUtils.GetString(reader, "BandName"),
-                                    bio = DbUtils.GetString(reader, "bio"),
+                                    bio = DbUtils.GetString(reader, "bandBio"),
                                     profilePic = DbUtils.GetString(reader, "BandProfilePic"),
-                                    genres = DbUtils.GetString(reader, "genres"),
+                                    genres = DbUtils.GetString(reader, "bandGenres"),
                                     searchingFor = DbUtils.GetString(reader, "searchingFor"),
                                     users = new List<User>()
                                 };
@@ -91,9 +92,14 @@ namespace MyBand.Repositories
                                 band.users.Add(new User()
                                 {
                                     id = DbUtils.GetInt(reader, "UserId"),
+                                    username = DbUtils.GetString(reader, "username"),
+                                    email = DbUtils.GetString(reader, "email"),
+                                    firebaseId = DbUtils.GetString(reader, "firebaseId"),
                                     name = DbUtils.GetString(reader, "UserName"),
-                                    firebaseId= DbUtils.GetString(reader, "firebaseId"),
+                                    bio = DbUtils.GetString(reader, "userBio"),
                                     profilePic = DbUtils.GetString(reader, "UserProfilePic"),
+                                    genres = DbUtils.GetString(reader, "userGenres"),
+                                    skills = DbUtils.GetString(reader, "skills"),
                                     role = DbUtils.GetString(reader, "RoleName")
                                 });
                             }
@@ -194,6 +200,31 @@ namespace MyBand.Repositories
                 }
             }
 
+        }
+
+        public void Update(Band band)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE Band " +
+                                      "SET [name] = @name, " +
+                                      "[bio] = @bio, " +
+                                      "[profilePic] = @profilePic, " +
+                                      "[genres] = @genres, " +
+                                      "[searchingFor] = @searchingFor " +
+                                      "WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", band.id);
+                    cmd.Parameters.AddWithValue("@name", band.name);
+                    cmd.Parameters.AddWithValue("@bio", band.bio);
+                    cmd.Parameters.AddWithValue("@profilePic", band.profilePic);
+                    cmd.Parameters.AddWithValue("@genres", band.genres);
+                    cmd.Parameters.AddWithValue("@searchingFor", band.searchingFor);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
