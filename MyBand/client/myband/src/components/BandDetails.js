@@ -47,7 +47,6 @@ export const BandDetails = ({ userProfile }) => {
     )
 
 
-
     return <>
         <div>
             {
@@ -94,6 +93,16 @@ export const BandDetails = ({ userProfile }) => {
                     <p>Genres: {band.genres}</p>
                 </div>
                 <h2>Members:</h2>
+                <div>
+                    {
+                        (isLeader)
+                            ? <>
+                                <Link to={`/editmembers/${band.id}`}>Edit</Link>
+                            </>
+                            : <>
+                            </>
+                    }
+                </div>
                 <div className="PhotoContainer">
                     {band?.users?.map((user) => (
                         <>

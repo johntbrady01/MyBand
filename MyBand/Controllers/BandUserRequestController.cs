@@ -44,6 +44,17 @@ namespace MyBand.Controllers
             return Ok(request);
         }
 
+        [HttpGet("GetMembersByBandId")]
+        public IActionResult GetMembersByBandId(int id)
+        {
+            var request = _bandUserRequestRepository.GetMembersByBandId(id);
+            if (request == null)
+            {
+                return NotFound();
+            }
+            return Ok(request);
+        }
+
         [HttpGet("GetByIdWithEverything")]
         public IActionResult GetByIdWithEverything(int id)
         {
