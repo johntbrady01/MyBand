@@ -25,6 +25,12 @@ namespace MyBand.Models
 
         public bool sentByBand { get; set; }
 
+        public Band band { get; set; }
+
+        public User user { get; set; }
+
+        public Role role { get; set; }
+
     }
 }
 

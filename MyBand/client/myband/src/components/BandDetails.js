@@ -115,7 +115,7 @@ export const BandDetails = ({ userProfile }) => {
             {
                 (isLeader)
                     ? <>
-                        <Link>See Requests to join band</Link>
+                        <Link to={`/bandrequests/${band.id}`}>See Requests to join band</Link>
                     </>
                     : <>
                     </>

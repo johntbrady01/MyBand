@@ -25,6 +25,35 @@ namespace MyBand.Controllers
             _bandUserRequestRepository.Add(bandUserRequest);
             return Ok(_bandUserRequestRepository.GetAllBandUserRequests());
         }
+
+        [HttpPut]
+        public IActionResult Edit(BandUserRequest bandUserRequest)
+        {
+            _bandUserRequestRepository.Update(bandUserRequest);
+            return Ok(bandUserRequest);
+        }
+
+        [HttpGet("GetByBandId")]
+        public IActionResult GetByBandId(int id)
+        {
+            var request = _bandUserRequestRepository.GetByBandId(id);
+            if (request == null)
+            {
+                return NotFound();
+            }
+            return Ok(request);
+        }
+
+        [HttpGet("GetByIdWithEverything")]
+        public IActionResult GetByIdWithEverything(int id)
+        {
+            var request = _bandUserRequestRepository.GetByIdWithEverything(id);
+            if (request == null)
+            {
+                return NotFound();
+            }
+            return Ok(request);
+        }
     }
 }
 
