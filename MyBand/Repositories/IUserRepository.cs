@@ -9,6 +9,7 @@ namespace MyBand.Repositories
         User GetByFirebaseId(string firebaseId);
         public List<User> GetAllUsers();
         public User GetByIdWithBands(int id);
+        public void Update(User user);
 
 
     }

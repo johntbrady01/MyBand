@@ -10,6 +10,7 @@ import { BandUserRequest } from "./BandUserRequest";
 import SeeBandRequests from "./SeeBandRequests";
 import { UpdateBand } from "./UpdateBand";
 import { DeleteBand } from "./DeleteBand";
+import { EditProfile } from "./EditProfile";
 
 
 export default function ApplicationViews({ isLoggedIn, userProfile }) {
@@ -23,10 +24,11 @@ export default function ApplicationViews({ isLoggedIn, userProfile }) {
                     />
                     <Route path="bands" element={<BandList />} />
                     <Route path="login" element={<Login />} />
-                    <Route path="User/:userId" element={<UserDetails />} />
+                    <Route path="User/:userId" element={<UserDetails userProfile={userProfile} />} />
                     <Route path="/bands/create" element={<AddBand userProfile={userProfile} />} />
                     <Route path="/bandrequest/:bandId" element={<BandUserRequest userProfile={userProfile} />} />
                     <Route path="/updateband/:bandId" element={<UpdateBand userProfile={userProfile} />} />
+                    <Route path="/updateprofile/:userId" element={<EditProfile userProfile={userProfile} />} />
                     <Route path="/deleteband/:bandId" element={<DeleteBand userProfile={userProfile} />} />
                     <Route path="/bandrequests/:bandId" element={<SeeBandRequests userProfile={userProfile} />} />
                     <Route path="Band/:bandId" element={<BandDetails userProfile={userProfile} />} />
