@@ -49,6 +49,26 @@ export const BandDetails = ({ userProfile }) => {
 
 
     return <>
+        <div>
+            {
+                (isLeader)
+                    ? <>
+                        <Link to={`/updateband/${band.id}`}>Edit Band</Link>
+                    </>
+                    : <>
+                    </>
+            }
+        </div>
+        <div>
+            {
+                (isLeader)
+                    ? <>
+                        <Link to={`/bandrequests/${band.id}`}>See Requests To Join Band</Link>
+                    </>
+                    : <>
+                    </>
+            }
+        </div>
         <div className="profilePageContainer">
             <div className="profilePage">
                 <div>
@@ -112,14 +132,7 @@ export const BandDetails = ({ userProfile }) => {
                 }
 
             </div>
-            {
-                (isLeader)
-                    ? <>
-                        <Link to={`/bandrequests/${band.id}`}>See Requests to join band</Link>
-                    </>
-                    : <>
-                    </>
-            }
         </div>
+
     </>
 }
