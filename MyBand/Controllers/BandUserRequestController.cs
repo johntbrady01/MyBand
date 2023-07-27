@@ -32,6 +32,18 @@ namespace MyBand.Controllers
             _bandUserRequestRepository.Update(bandUserRequest);
             return Ok(bandUserRequest);
         }
+
+        [HttpGet("GetByBandId")]
+        public IActionResult GetByBandId(int id)
+        {
+            var request = _bandUserRequestRepository.GetByBandId(id);
+            if (request == null)
+            {
+                return NotFound();
+            }
+            return Ok(request);
+        }
+
     }
 }
 
