@@ -8,7 +8,7 @@ using MyBand.Utils;
 
 namespace MyBand.Repositories
 {
-	public class BandUserRequestRepository : BaseRepository, IBandUserRequestRepository
+    public class BandUserRequestRepository : BaseRepository, IBandUserRequestRepository
     {
         public BandUserRequestRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -60,8 +60,8 @@ namespace MyBand.Repositories
                             userId = DbUtils.GetInt(reader, "userId"),
                             bandId = DbUtils.GetInt(reader, "bandId"),
                             roleId = DbUtils.GetInt(reader, "roleId"),
-                            isLeader =reader.GetBoolean(reader.GetOrdinal("isLeader")),
-                            isAccepted = reader.GetBoolean(reader.GetOrdinal( "isAccepted")),
+                            isLeader = reader.GetBoolean(reader.GetOrdinal("isLeader")),
+                            isAccepted = reader.GetBoolean(reader.GetOrdinal("isAccepted")),
                             note = DbUtils.GetString(reader, "note"),
                             sentByBand = reader.GetBoolean(reader.GetOrdinal("sentByBand"))
 
@@ -126,36 +126,39 @@ namespace MyBand.Repositories
                     {
 
 
-                        
+
 
                         while (reader.Read())
                         {
 
 
                             bandUserRequests.Add(new BandUserRequest()
+                            {
+                                id = DbUtils.GetInt(reader, "requestId"),
+                                userId = DbUtils.GetInt(reader, "userId"),
+                                bandId = DbUtils.GetInt(reader, "bandId"),
+                                roleId = DbUtils.GetInt(reader, "roleId"),
+                                isLeader = reader.GetBoolean(reader.GetOrdinal("isLeader")),
+                                isAccepted = reader.GetBoolean(reader.GetOrdinal("isAccepted")),
+                                note = DbUtils.GetString(reader, "note"),
+                                sentByBand = reader.GetBoolean(reader.GetOrdinal("sentByBand")),
+                                band = new Band()
                                 {
-                                   id = DbUtils.GetInt(reader, "requestId"),
-                                   userId = DbUtils.GetInt(reader, "userId"),
-                                   bandId = DbUtils.GetInt(reader, "bandId"),
-                                   roleId = DbUtils.GetInt(reader, "roleId"),
-                                   isLeader = reader.GetBoolean(reader.GetOrdinal("isLeader")),
-                                   isAccepted = reader.GetBoolean(reader.GetOrdinal("isAccepted")),
-                                   note = DbUtils.GetString(reader, "note"),
-                                   sentByBand = reader.GetBoolean(reader.GetOrdinal("sentByBand")),
-                                    band = new Band() {
-                                       id = DbUtils.GetInt(reader, "bandId"),
-                                       name =DbUtils.GetString(reader, "bandName"),
-                                   },
-                                   user = new User() {
-                                       id = DbUtils.GetInt(reader, "userId"),
-                                       name =DbUtils.GetString(reader, "userName"),
-                                   },
-                                   role =  new Role() {
-                                       id = DbUtils.GetInt(reader, "roleId"),
-                                       name =DbUtils.GetString(reader, "roleName"),
-                                   }
-                               });
-                            
+                                    id = DbUtils.GetInt(reader, "bandId"),
+                                    name = DbUtils.GetString(reader, "bandName"),
+                                },
+                                user = new User()
+                                {
+                                    id = DbUtils.GetInt(reader, "userId"),
+                                    name = DbUtils.GetString(reader, "userName"),
+                                },
+                                role = new Role()
+                                {
+                                    id = DbUtils.GetInt(reader, "roleId"),
+                                    name = DbUtils.GetString(reader, "roleName"),
+                                }
+                            });
+
                         }
 
                         return bandUserRequests;
@@ -166,6 +169,86 @@ namespace MyBand.Repositories
 
         }
 
+        public BandUserRequest GetByIdWithEverything(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                      SELECT  bUR.id AS requestId, bUR.userId, bUR.bandId, bUR.roleId, bUR.isLeader, bUR.isAccepted, bUR.note, bUR.sentByBand, 
+                    b.id AS bandId, b.name AS bandName, b.bio AS bandBio, b.profilePic AS bandPic, b.genres AS bandGenres, b.searchingFor,
+                     u.id AS userId, u.username, u.email, u.firebaseId, u.name AS userName, u.bio AS userBio, u.profilePic AS userPic, u.genres AS userGenres, u.skills,
+                     r.name AS roleName
+                    FROM BandUserRequest BUR
+                    JOIN Band b on bUR.bandId=b.id
+                    JOIN [User] u on bUR.userId=u.id
+                    JOIN [Role] r on bUR.roleId=r.id
+                    WHERE isAccepted=0
+                    AND bUR.id=@Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+
+
+                        BandUserRequest request = null;
+
+                        while (reader.Read())
+                        {
+                            if (request == null)
+                            {
+
+                                request = new BandUserRequest()
+                                {
+                                    id = DbUtils.GetInt(reader, "requestId"),
+                                    userId = DbUtils.GetInt(reader, "userId"),
+                                    bandId = DbUtils.GetInt(reader, "bandId"),
+                                    roleId = DbUtils.GetInt(reader, "roleId"),
+                                    isLeader = reader.GetBoolean(reader.GetOrdinal("isLeader")),
+                                    isAccepted = reader.GetBoolean(reader.GetOrdinal("isAccepted")),
+                                    note = DbUtils.GetString(reader, "note"),
+                                    sentByBand = reader.GetBoolean(reader.GetOrdinal("sentByBand")),
+                                    band = new Band()
+                                    {
+                                        id = DbUtils.GetInt(reader, "bandId"),
+                                        name = DbUtils.GetString(reader, "bandName"),
+                                        bio = DbUtils.GetString(reader, "bandBio"),
+                                        profilePic = DbUtils.GetString(reader, "bandPic"),
+                                        genres = DbUtils.GetString(reader, "bandGenres"),
+                                        searchingFor = DbUtils.GetString(reader, "searchingFor"),
+                                    },
+                                    user = new User()
+                                    {
+                                        id = DbUtils.GetInt(reader, "userId"),
+                                        username = DbUtils.GetString(reader, "username"),
+                                        email = DbUtils.GetString(reader, "email"),
+                                        firebaseId = DbUtils.GetString(reader, "firebaseId"),
+                                        name = DbUtils.GetString(reader, "userName"),
+                                        bio = DbUtils.GetString(reader, "userBio"),
+                                        profilePic = DbUtils.GetString(reader, "userPic"),
+                                        genres = DbUtils.GetString(reader, "userGenres"),
+                                        skills = DbUtils.GetString(reader, "skills"),
+                                    },
+                                    role = new Role()
+                                    {
+                                        id = DbUtils.GetInt(reader, "roleId"),
+                                        name = DbUtils.GetString(reader, "roleName"),
+                                    }
+                                };
+                            }
+                        }
+
+                        return request;
+
+
+                    }
+                }
+            }
+
+        }
     }
 }
 

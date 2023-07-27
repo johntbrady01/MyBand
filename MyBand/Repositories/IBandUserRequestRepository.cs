@@ -10,6 +10,7 @@ namespace MyBand.Repositories
         public List<BandUserRequest> GetAllBandUserRequests();
         public void Update(BandUserRequest bandUserRequest);
         public List<BandUserRequest> GetByBandId(int id);
+        public BandUserRequest GetByIdWithEverything(int id);
 
     }
 }
