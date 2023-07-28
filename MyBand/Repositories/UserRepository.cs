@@ -101,7 +101,7 @@ namespace MyBand.Repositories
                         FROM [User] u
                         LEFT JOIN [BandUserRequest] ON BandUserRequest.userId = u.id AND BandUserRequest.isAccepted = 1
                         LEFT JOIN Band b ON b.id = BandUserRequest.bandId
-                        JOIN Role r on BandUserRequest.roleId=r.id
+                        LEFT JOIN Role r on BandUserRequest.roleId=r.id
                         WHERE u.id =@Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
@@ -185,6 +185,32 @@ namespace MyBand.Repositories
                     cmd.Parameters.AddWithValue("@genres", user.genres);
                     cmd.Parameters.AddWithValue("@skills", user.skills);
                     cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Add(User user)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO [User] (firebaseId, name, username, 
+                                                                 email, bio, profilePic, skills, genres)
+                                        OUTPUT INSERTED.iD
+                                        VALUES (@firebaseId, @name, @username, @email, 
+                                                @bio, @profilePic, @skills, @genres)";
+                    DbUtils.AddParameter(cmd, "@firebaseId", user.firebaseId);
+                    DbUtils.AddParameter(cmd, "@name", user.name);
+                    DbUtils.AddParameter(cmd, "@username", user.username);
+                    DbUtils.AddParameter(cmd, "@email", user.email);
+                    DbUtils.AddParameter(cmd, "@bio", user.bio);
+                    DbUtils.AddParameter(cmd, "@profilePic", user.profilePic);
+                    DbUtils.AddParameter(cmd, "@skills", user.skills);
+                    DbUtils.AddParameter(cmd, "@genres", user.genres);
+
+                    user.id = (int)cmd.ExecuteScalar();
                 }
             }
         }

@@ -13,6 +13,7 @@ import { DeleteBand } from "./DeleteBand";
 import { EditProfile } from "./EditProfile";
 import { EditMembers } from "./EditMembers";
 import { SeeEditMembers } from "./SeeEditMembers";
+import Register from "./Register";
 
 
 export default function ApplicationViews({ isLoggedIn, userProfile }) {
@@ -35,6 +36,7 @@ export default function ApplicationViews({ isLoggedIn, userProfile }) {
                     <Route path="/deleteband/:bandId" element={<DeleteBand userProfile={userProfile} />} />
                     <Route path="/bandrequests/:bandId" element={<SeeBandRequests userProfile={userProfile} />} />
                     <Route path="Band/:bandId" element={<BandDetails userProfile={userProfile} />} />
+                    <Route path="register" element={<Register />} />
                     <Route path="*" element={<p>Whoops, nothing here...</p>} />
                 </Route>
             </Routes>
