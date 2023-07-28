@@ -41,11 +41,11 @@ export const EditMembers = ({ member, userProfile }) => {
     const deleteButton = () => {
         return <button onClick={() => {
 
-            fetch(`/api/BandUserRequest/${member.id}`, {
+            fetch(`/api/BandUserRequest/${member?.id}`, {
                 method: "DELETE"
             })
                 .then(() => {
-                    navigate(`/Band/${member.bandId}`)
+                    navigate(`/Band/${member?.bandId}`)
                 })
 
         }} className="request__delete">Remove From Band</button>
@@ -59,7 +59,7 @@ export const EditMembers = ({ member, userProfile }) => {
         <>
             <div className="requestDiv">
                 {
-                    (member?.userId == userProfile.id)
+                    (member?.userId == userProfile?.id)
                         ? <>
                         </>
                         : <>
@@ -88,11 +88,11 @@ export const EditMembers = ({ member, userProfile }) => {
                                                 justifyContent: "space-between"
                                             }}
                                         >
-                                            <Link to={`/User/${member.user.id}`}>{member?.user?.name}</Link>
+                                            <Link to={`/User/${member?.user?.id}`}>{member?.user?.name}</Link>
                                         </CardTitle>
                                     </CardBody>
                                 </Card>
-                                {member?.user.role}
+                                {member?.user?.role}
                             </div>
                             {
                                 (member?.isLeader)
@@ -103,7 +103,16 @@ export const EditMembers = ({ member, userProfile }) => {
                                     </>
 
                             }
-                            <div className="button">{deleteButton()}</div>
+                            {
+                                (member?.isLeader)
+                                    ? <>
+                                    </>
+                                    : <>
+                                        <div className="button">{deleteButton()}</div>
+                                    </>
+
+                            }
+
                         </>
                 }
             </div>

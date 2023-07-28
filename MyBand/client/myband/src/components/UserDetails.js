@@ -53,9 +53,10 @@ export const UserDetails = ({ userProfile }) => {
                     <p>{user.genres}</p>
                     <p>{user.skills}</p>
                 </div>
-                <div class="PhotoContainer">
+                <div className="PhotoContainer">
                     {user?.bands?.map((band) => (
                         <Card
+                            key={user.id}
                             style={{
                                 width: '18rem',
                                 color: "success",

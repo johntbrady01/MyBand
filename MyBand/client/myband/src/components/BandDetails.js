@@ -13,6 +13,9 @@ export const BandDetails = ({ userProfile }) => {
     const leaderUrl = `/api/Band/GetByIdWithLeaders?id=${bandId}`
     const [isLeader, setIsLeader] = useState(false)
     const [inBand, setInBand] = useState(false)
+    const [hasRequested, setHasRequested] = useState(false)
+    const requestedUrl = `/api/Band/GetByIdWithRequests?id=${bandId}`
+    const [bandWithRequests, setBandWithRequests] = useState([])
 
     useEffect(() => {
         fetch(baseUrl).then(res => (res.json())).then(band => {
@@ -21,6 +24,23 @@ export const BandDetails = ({ userProfile }) => {
                 if (userProfile?.id === user?.id) {
                     setInBand(true)
                     break;
+                }
+            }
+        })
+
+    }
+        , [bandId]
+    )
+
+    useEffect(() => {
+        fetch(requestedUrl).then(res => (res.json())).then(bandWithRequests => {
+            setBandWithRequests(bandWithRequests)
+            if (bandWithRequests.users) {
+                for (const user of bandWithRequests?.users) {
+                    if (userProfile?.id === user?.id) {
+                        setHasRequested(true)
+                        break;
+                    }
                 }
             }
         })
@@ -102,12 +122,21 @@ export const BandDetails = ({ userProfile }) => {
                             : <>
                             </>
                     }
+                    {
+                        (inBand && !isLeader)
+                            ? <>
+                                <Link to={`/leaveband/${band.id}`}>Leave Band</Link>
+                            </>
+                            : <>
+                            </>
+                    }
                 </div>
                 <div className="PhotoContainer">
                     {band?.users?.map((user) => (
-                        <>
+                        <div key={user.id}>
                             <div>
                                 <Card
+
                                     style={{
                                         width: '12rem',
                                         color: "success",
@@ -126,6 +155,7 @@ export const BandDetails = ({ userProfile }) => {
                                     />
                                     <CardBody>
                                         <CardTitle tag="h5"
+
                                             style={{
                                                 display: 'flex',
                                                 justifyContent: "space-between"
@@ -137,12 +167,12 @@ export const BandDetails = ({ userProfile }) => {
                                 </Card>
                                 {user.role}
                             </div>
-                        </>
+                        </div>
                     ))}
                 </div>
                 <p>Searching For: {band.searchingFor}</p>
                 {
-                    (inBand)
+                    (inBand || hasRequested)
                         ? <>
 
                         </>

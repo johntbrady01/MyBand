@@ -67,6 +67,17 @@ namespace MyBand.Controllers
             _bandRepository.Delete(id);
             return Ok(_bandRepository.GetAllBands());
         }
+
+        [HttpGet("GetByIdWithRequests")]
+        public IActionResult GetByIdWithRequests(int id)
+        {
+            var band = _bandRepository.GetByIdWithRequests(id);
+            if (band == null)
+            {
+                return NotFound();
+            }
+            return Ok(band);
+        }
     }
 }
 
