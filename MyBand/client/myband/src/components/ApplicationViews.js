@@ -14,6 +14,8 @@ import { EditProfile } from "./EditProfile";
 import { EditMembers } from "./EditMembers";
 import { SeeEditMembers } from "./SeeEditMembers";
 import Register from "./Register";
+import { LeaveBand } from "./LeaveBand";
+import SeeLeaveBand from "./SeeLeaveBand";
 
 
 export default function ApplicationViews({ isLoggedIn, userProfile }) {
@@ -33,6 +35,7 @@ export default function ApplicationViews({ isLoggedIn, userProfile }) {
                     <Route path="/updateband/:bandId" element={<UpdateBand userProfile={userProfile} />} />
                     <Route path="/updateprofile/:userId" element={<EditProfile userProfile={userProfile} />} />
                     <Route path="/editmembers/:bandId" element={<SeeEditMembers userProfile={userProfile} />} />
+                    <Route path="/leaveband/:bandId" element={<SeeLeaveBand userProfile={userProfile} />} />
                     <Route path="/deleteband/:bandId" element={<DeleteBand userProfile={userProfile} />} />
                     <Route path="/bandrequests/:bandId" element={<SeeBandRequests userProfile={userProfile} />} />
                     <Route path="Band/:bandId" element={<BandDetails userProfile={userProfile} />} />

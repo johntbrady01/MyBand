@@ -122,6 +122,14 @@ export const BandDetails = ({ userProfile }) => {
                             : <>
                             </>
                     }
+                    {
+                        (inBand && !isLeader)
+                            ? <>
+                                <Link to={`/leaveband/${band.id}`}>Leave Band</Link>
+                            </>
+                            : <>
+                            </>
+                    }
                 </div>
                 <div className="PhotoContainer">
                     {band?.users?.map((user) => (
