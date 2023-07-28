@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { CardBody } from "reactstrap";
 import { CardTitle } from "reactstrap";
 import { Card } from "reactstrap";
+import { Link, useParams } from "react-router-dom"
 
 export const EditMembers = ({ member, userProfile }) => {
     const navigate = useNavigate()
@@ -87,7 +88,7 @@ export const EditMembers = ({ member, userProfile }) => {
                                                 justifyContent: "space-between"
                                             }}
                                         >
-                                            {member?.user?.name}
+                                            <Link to={`/User/${member.user.id}`}>{member?.user?.name}</Link>
                                         </CardTitle>
                                     </CardBody>
                                 </Card>
