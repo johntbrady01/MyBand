@@ -240,6 +240,76 @@ namespace MyBand.Repositories
                 }
             }
         }
+
+        public Band GetByIdWithRequests(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                     SELECT  b.profilePic AS BandProfilePic, b.name AS BandName, b.Id AS BandId,
+                        bUR.isAccepted, bUR.roleId, r.Name As RoleName, b.bio AS bandBio, b.genres AS bandGenres, b.searchingFor, u.Id AS UserId, u.username, u.email, u.firebaseId, u.name AS UserName, u.bio AS userBio, u.profilePic AS UserProfilePic,
+                        u.genres AS userGenres, u.skills
+                        FROM Band b
+                        JOIN BandUserRequest bUR ON b.id = bUR.bandId
+                        JOIN [User] u ON bUR.userId=u.id
+                        JOIN [Role] r on bUR.roleId=r.id
+                        WHERE isAccepted=0
+                        AND b.id=@Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+
+
+                        Band band = null;
+
+                        while (reader.Read())
+                        {
+                            if (band == null)
+                            {
+
+                                band = new Band()
+                                {
+                                    id = DbUtils.GetInt(reader, "BandId"),
+                                    name = DbUtils.GetString(reader, "BandName"),
+                                    bio = DbUtils.GetString(reader, "bandBio"),
+                                    profilePic = DbUtils.GetString(reader, "BandProfilePic"),
+                                    genres = DbUtils.GetString(reader, "bandGenres"),
+                                    searchingFor = DbUtils.GetString(reader, "searchingFor"),
+                                    users = new List<User>()
+                                };
+                            }
+
+                            if (DbUtils.IsNotDbNull(reader, "isAccepted"))
+                            {
+                                band.users.Add(new User()
+                                {
+                                    id = DbUtils.GetInt(reader, "UserId"),
+                                    username = DbUtils.GetString(reader, "username"),
+                                    email = DbUtils.GetString(reader, "email"),
+                                    firebaseId = DbUtils.GetString(reader, "firebaseId"),
+                                    name = DbUtils.GetString(reader, "UserName"),
+                                    bio = DbUtils.GetString(reader, "userBio"),
+                                    profilePic = DbUtils.GetString(reader, "UserProfilePic"),
+                                    genres = DbUtils.GetString(reader, "userGenres"),
+                                    skills = DbUtils.GetString(reader, "skills"),
+                                    role = DbUtils.GetString(reader, "RoleName")
+                                });
+                            }
+                        }
+
+                        return band;
+
+
+                    }
+                }
+            }
+
+        }
     }
 }
 
