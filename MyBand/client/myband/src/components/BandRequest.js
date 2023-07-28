@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 export const BandRequest = ({ request }) => {
     const navigate = useNavigate()
@@ -53,7 +54,7 @@ export const BandRequest = ({ request }) => {
 
     return (
         <div className="requestDiv">
-            <p>{request?.user?.name}</p>
+            <Link to={`/User/${request.user.id}`}>{request?.user?.name}</Link>
             <p>{request?.role?.name}</p>
             <p>{request?.note}</p>
             <div className="button">{acceptButton()}</div>
