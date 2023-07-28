@@ -81,6 +81,18 @@ namespace MyBand.Controllers
             _userRepository.Update(user);
             return Ok(user);
         }
+
+        [HttpPost]
+        public IActionResult Post(User user)
+        {
+       
+            _userRepository.Add(user);
+            return CreatedAtAction(
+                nameof(GetUser),
+                new { firebaseId = user.firebaseId },
+                user);
+        }
     }
 }
+
 
