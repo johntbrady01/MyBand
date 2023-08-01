@@ -29,7 +29,7 @@ export const BandDetails = ({ userProfile }) => {
         })
 
     }
-        , [bandId]
+        , [bandId, userProfile]
     )
 
     useEffect(() => {
@@ -46,7 +46,7 @@ export const BandDetails = ({ userProfile }) => {
         })
 
     }
-        , [bandId]
+        , [bandId, userProfile]
     )
 
     useEffect(() => {
@@ -63,7 +63,7 @@ export const BandDetails = ({ userProfile }) => {
             })
 
     }
-        , [bandId]
+        , [bandId, userProfile]
     )
 
 

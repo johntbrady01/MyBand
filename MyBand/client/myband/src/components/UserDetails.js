@@ -23,7 +23,7 @@ export const UserDetails = ({ userProfile }) => {
         })
 
     }
-        , [userId]
+        , [userId, userProfile]
     )
 
 
