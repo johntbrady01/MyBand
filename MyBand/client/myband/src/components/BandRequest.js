@@ -54,9 +54,9 @@ export const BandRequest = ({ request }) => {
 
     return (
         <div className="requestDiv">
-            <Link to={`/User/${request.user.id}`}>{request?.user?.name}</Link>
-            <p>{request?.role?.name}</p>
-            <p>{request?.note}</p>
+            <p>Name: <Link to={`/User/${request.user.id}`}>{request?.user?.name}</Link></p>
+            <p>Role: {request?.role?.name}</p>
+            <p>Note: {request?.note}</p>
             <div className="button">{acceptButton()}</div>
             <div className="button">{deleteButton()}</div>
         </div>

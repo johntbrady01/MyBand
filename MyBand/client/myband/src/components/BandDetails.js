@@ -109,7 +109,7 @@ export const BandDetails = ({ userProfile }) => {
                             height: '12rem',
                             objectFit: 'cover'
                         }} />
-                    <p>{band.bio}</p>
+                    <p>Bio: {band.bio}</p>
                     <p>Genres: {band.genres}</p>
                 </div>
                 <h2>Members:</h2>
