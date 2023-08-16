@@ -49,10 +49,11 @@ export const UserDetails = ({ userProfile }) => {
                             height: '12rem',
                             objectFit: 'cover'
                         }} />
-                    <p>{user.bio}</p>
-                    <p>{user.genres}</p>
-                    <p>{user.skills}</p>
+                    <p>Bio: {user.bio}</p>
+                    <p>Genres: {user.genres}</p>
+                    <p>Skills: {user.skills}</p>
                 </div>
+                <h2>Bands:</h2>
                 <div className="PhotoContainer">
                     {user?.bands?.map((band) => (
                         <Card
