@@ -17,11 +17,11 @@ export default function Header({ isLoggedIn, userProfile }) {
 
     return (
         <div>
-            <Navbar color="light" light expand="md">
-                <NavbarBrand tag={RRNavLink} to="/">My Band</NavbarBrand>
+            <Navbar color="light" light expand="md" >
+                <NavbarBrand tag={RRNavLink} to="/" >My Band</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
-                    <Nav className="App-Header" navbar>
+                    <Nav className="App-Header" navbar >
                         { /* When isLoggedIn === true, we will render the Home link */}
                         {isLoggedIn &&
                             <>

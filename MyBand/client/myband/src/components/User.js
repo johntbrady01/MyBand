@@ -27,8 +27,8 @@ export const User = ({ user }) => {
                     objectFit: 'cover'
                 }}
             />
-            <CardBody>
-                <CardTitle tag="h5">
+            <CardBody >
+                <CardTitle tag="h5" >
                     <Link to={`/User/${user.id}`}>{user?.name}</Link>
                 </CardTitle>
             </CardBody>

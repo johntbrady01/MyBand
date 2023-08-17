@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
+import { Routes, BrowserRouter as Router } from "react-router-dom";
 import { Spinner } from 'reactstrap';
 import ApplicationViews from "./components/ApplicationViews";
 import { onLoginStatusChange } from "./modules/authManager"
@@ -32,7 +32,7 @@ function App() {
     <Router>
       <Header isLoggedIn={isLoggedIn} userProfile={userProfile} />
       <ApplicationViews isLoggedIn={isLoggedIn} userProfile={userProfile} />
-    </Router>
+    </Router >
   );
 }
 
