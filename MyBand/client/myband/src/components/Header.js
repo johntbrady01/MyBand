@@ -21,7 +21,7 @@ export default function Header({ isLoggedIn, userProfile }) {
                 <NavbarBrand tag={RRNavLink} to="/">My Band</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
-                    <Nav className="mr-auto" navbar>
+                    <Nav className="App-Header" navbar>
                         { /* When isLoggedIn === true, we will render the Home link */}
                         {isLoggedIn &&
                             <>
