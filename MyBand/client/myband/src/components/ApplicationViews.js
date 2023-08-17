@@ -16,6 +16,7 @@ import { SeeEditMembers } from "./SeeEditMembers";
 import Register from "./Register";
 import { LeaveBand } from "./LeaveBand";
 import SeeLeaveBand from "./SeeLeaveBand";
+import Header from "./Header";
 
 
 export default function ApplicationViews({ isLoggedIn, userProfile }) {

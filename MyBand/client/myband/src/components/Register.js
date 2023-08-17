@@ -110,7 +110,7 @@ export default function Register() {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Button>Register</Button>
+                    <Button style={{ backgroundColor: 'rgb(253,216,19)', color: 'black' }}>Register</Button>
                 </FormGroup>
             </fieldset>
         </Form>

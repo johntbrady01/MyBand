@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Link, useParams } from "react-router-dom"
+import { Table } from "reactstrap"
 
 export const BandRequest = ({ request }) => {
     const navigate = useNavigate()
@@ -52,13 +53,28 @@ export const BandRequest = ({ request }) => {
 
 
 
-    return (
+    return <>
         <div className="requestDiv">
-            <p>Name: <Link to={`/User/${request.user.id}`}>{request?.user?.name}</Link></p>
-            <p>Role: {request?.role?.name}</p>
-            <p>Note: {request?.note}</p>
-            <div className="button">{acceptButton()}</div>
-            <div className="button">{deleteButton()}</div>
+
+            <Table bordered >
+                <tbody>
+                    <tr>
+                        <th scope="row" style={{ width: '20rem' }}>
+                            <Link to={`/User/${request.user.id}`}>{request?.user?.name}</Link>
+                        </th>
+                        <td style={{ width: '20rem' }}>
+                            {request?.role?.name}
+                        </td>
+                        <td style={{ width: '20rem' }}>
+                            {request?.note}
+                        </td>
+                        <td style={{ width: '5rem', display: 'flex' }}>
+                            <div className="button" style={{ width: '5rem', paddingRight: '7rem' }}>{acceptButton()}</div>
+                            <div className="button" style={{ width: '5rem' }}>{deleteButton()}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </Table>
         </div>
-    )
+    </>
 }
