@@ -60,6 +60,11 @@ code {
   padding: 1em;
 }
 
-label {
+.label {
   font-weight: 600;
+}
+
+.role {
+  padding-left: 60px;
+  padding-bottom: 50px;
 }

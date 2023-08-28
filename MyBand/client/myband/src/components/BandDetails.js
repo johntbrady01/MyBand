@@ -107,7 +107,9 @@ export const BandDetails = ({ userProfile }) => {
                         style={{
                             width: '18rem',
                             height: '12rem',
-                            objectFit: 'cover'
+                            objectFit: 'cover',
+                            marginTop: '10px',
+                            marginBottom: '30px'
                         }} />
                     <p>Bio: {band.bio}</p>
                     <p>Genres: {band.genres}</p>
@@ -142,6 +144,7 @@ export const BandDetails = ({ userProfile }) => {
                                         color: "success",
                                         margin: '2rem'
 
+
                                     }}
                                 >
                                     <img
@@ -151,6 +154,7 @@ export const BandDetails = ({ userProfile }) => {
                                             width: '12rem',
                                             height: '12rem',
                                             objectFit: 'cover'
+
                                         }}
                                     />
                                     <CardBody>
@@ -165,7 +169,7 @@ export const BandDetails = ({ userProfile }) => {
                                         </CardTitle>
                                     </CardBody>
                                 </Card>
-                                {user.role}
+                                <div className='role'>{user.role}</div>
                             </div>
                         </div>
                     ))}

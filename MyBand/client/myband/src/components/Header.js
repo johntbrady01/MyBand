@@ -17,7 +17,7 @@ export default function Header({ isLoggedIn, userProfile }) {
 
     return (
         <div>
-            <Navbar color="light" light expand="md" >
+            <Navbar light expand="md" >
                 <NavbarBrand tag={RRNavLink} to="/" >My Band</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
